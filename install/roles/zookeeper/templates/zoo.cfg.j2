@@ -1,0 +1,9 @@
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/vagrant/tools/zookeeper/data
+clientPort=2181
+{% for host in groups['zookeeper'] %}
+server.{{ loop.index }}={{ host }}:2888:3888
+{% endfor %}
+

@@ -1,0 +1,5 @@
+.vagrant
+tools
+install/*.retry
+ansible.log
+opt/*.retry

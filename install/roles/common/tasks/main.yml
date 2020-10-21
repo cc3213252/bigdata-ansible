@@ -1,0 +1,33 @@
+---
+
+- name: 拷贝公钥
+  copy:
+    src: id_rsa.pub
+    dest: "/home/vagrant/.ssh/"
+    mode: 0600
+
+- name: 拷贝私钥
+  copy:
+    src: id_rsa
+    dest: "/home/vagrant/.ssh/"
+    mode: 0600
+
+- name: 设置无密访问
+  authorized_key: user=vagrant key="{{ lookup('file', '../files/id_rsa.pub') }}"
+
+- name: 设置java环境变量
+  template : src=java.sh.j2 dest=/etc/profile.d/java.sh
+  become: yes
+
+- name: 删除原先/etc/hosts中hostname的那行
+  lineinfile:
+    dest:  /etc/hosts
+    state: absent
+    regexp: "^127"
+  become: yes
+
+- name: Disable selinux
+  become: yes
+  selinux:
+    state: disabled
+  notify: Reload systemd

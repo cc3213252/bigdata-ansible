@@ -1,0 +1,19 @@
+---
+
+- name: 创建zookeeper数据目录
+  file:
+    path: /vagrant/tools/zookeeper/data
+    state: directory
+    mode: 0760
+
+- name: 配置zoo.cfg
+  template:
+    src: zoo.cfg.j2
+    dest: /vagrant/tools/zookeeper/conf/zoo.cfg
+    mode: 0760
+
+- name: 配置myid
+  template:
+    src: myid.j2
+    dest: /vagrant/tools/zookeeper/data/myid
+    mode: 0760

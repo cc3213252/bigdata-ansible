@@ -1,0 +1,1 @@
+{% for host in groups['zookeeper'] %}{% if host == ansible_hostname %}{{loop.index}}{% endif %}{% endfor %}

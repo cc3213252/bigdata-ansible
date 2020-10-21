@@ -1,0 +1,30 @@
+---
+- hosts: zookeeper
+  tasks:
+    - name: start zookeeper
+      shell: /vagrant/tools/zookeeper/bin/zkServer.sh start
+  tags: start
+
+- hosts: zookeeper
+  tasks:
+    - name: stop zookeeper
+      shell: /vagrant/tools/zookeeper/bin/zkServer.sh stop
+  tags: stop
+
+- hosts: zookeeper
+  tasks:
+    - name: restart zookeeper
+      shell: /vagrant/tools/zookeeper/bin/zkServer.sh restart
+  tags: restart
+
+- hosts: zookeeper
+  tasks:
+    - name: status zookeeper
+      shell: /vagrant/tools/zookeeper/bin/zkServer.sh status
+      register: server_mode
+
+    - name: print status
+      debug:
+        msg: "{{ server_mode.stdout }}"
+  tags: status
+
