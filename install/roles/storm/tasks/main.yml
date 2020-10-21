@@ -1,0 +1,14 @@
+---
+
+- name: 创建status目录
+  file: path=/vagrant/tools/storm/status state=directory
+
+- name: 配置storm.yaml
+  template:
+    src: storm.yaml.j2
+    dest: /vagrant/tools/storm/conf/storm.yaml
+    mode: 0760
+
+- name: 设置storm环境变量
+  template : src=storm.sh.j2 dest=/etc/profile.d/storm.sh
+  become: yes

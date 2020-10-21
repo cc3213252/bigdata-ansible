@@ -1,0 +1,30 @@
+---
+- hosts: nimbus
+  tasks:
+    - name: start ui
+      shell: nohup storm ui > storm-ui.log &
+  tags: start-ui
+
+- hosts: nimbus
+  tasks:
+    - name: start nimbus
+      shell: nohup storm nimbus > storm-nimbus.log &
+  tags: start-nimbus
+
+- hosts: supervisor
+  tasks:
+    - name: start supervisor
+      shell: nohup storm supervisor > storm-supervisor.log &
+  tags: start-supervisor
+
+- hosts: storm
+  tasks:
+    - name: jps
+      shell: jps
+      register: server_mode
+
+    - name: print status
+      debug:
+        msg: "{{ server_mode.stdout }}"
+  tags: status
+

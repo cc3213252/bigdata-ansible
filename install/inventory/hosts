@@ -27,4 +27,14 @@ host3
 [standby_namenode]
 host2
 
+[storm]
+host1
+host2
+host3
 
+[nimbus]
+host1
+
+[supervisor]
+host2
+host3

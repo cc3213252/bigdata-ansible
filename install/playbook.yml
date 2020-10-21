@@ -14,10 +14,18 @@
   tags:
     - zookeeper
 
-- hosts: all
+#- hosts: all
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: hadoop
+#  tags:
+#    - hadoop
+
+- hosts: storm
   gather_facts: true
   become: false
   roles:
-    - role: hadoop
+    - role: storm
   tags:
-    - hadoop
+    - storm
