@@ -1,21 +1,17 @@
 ---
 - hosts: nimbus
   tasks:
-    - name: start ui
-      shell: nohup storm ui > storm-ui.log &
-  tags: start-ui
-
-- hosts: nimbus
-  tasks:
     - name: start nimbus
       shell: nohup storm nimbus > storm-nimbus.log &
-  tags: start-nimbus
+    - name: start ui
+      shell: nohup storm ui > storm-ui.log &
+  tags: start
 
 - hosts: supervisor
   tasks:
     - name: start supervisor
       shell: nohup storm supervisor > storm-supervisor.log &
-  tags: start-supervisor
+  tags: start
 
 - hosts: storm
   tasks:
@@ -28,3 +24,23 @@
         msg: "{{ server_mode.stdout }}"
   tags: status
 
+- hosts: nimbus
+  tasks:
+    - name: stop ui
+      shell: kill -9 `ps -ef | grep ui.core | awk '{print $2}'|head -n 1`
+
+    - name: stop nimbus
+      shell: kill -9 `ps -ef | grep daemon.nimbus | awk '{print $2}'|head -n 1`
+  tags: stop
+
+## 必须两个都存在才不会报错，TODO: 须判断是否存在进程
+- hosts: supervisor
+  tasks:
+    - name: stop supervisor
+      shell: kill -9 `ps -ef | grep supervisor | awk '{print $2}'|head -n 1`
+      become: yes
+
+    - name: stop worker
+      shell: pkill -TERM -f 'backtype.storm.daemon.worker'
+      become: yes
+  tags: stop

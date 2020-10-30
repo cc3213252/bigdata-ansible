@@ -1,0 +1,19 @@
+---
+- hosts: kafka
+  tasks:
+    - name: start kafka
+      shell: kafka-server-start.sh -daemon /vagrant/tools/kafka/config/server.properties
+  tags: start
+
+
+- hosts: kafka
+  tasks:
+    - name: jps
+      shell: jps
+      register: server_mode
+
+    - name: print status
+      debug:
+        msg: "{{ server_mode.stdout }}"
+  tags: status
+

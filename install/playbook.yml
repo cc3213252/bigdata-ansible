@@ -29,3 +29,11 @@
     - role: storm
   tags:
     - storm
+
+- hosts: kafka
+  gather_facts: true
+  become: false
+  roles:
+    - role: kafka
+  tags:
+    - kafka

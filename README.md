@@ -4,7 +4,7 @@
 
 我们搞大数据开发，多数是集群环境，有大量的配置，有时一个环境问题花费大量时间排查，为了提升效率，开发了这套脚本。 
  
-这套脚本安装一个3台机器的zookeeper集群，从无到有只需要4分钟，而且脚本极其简单。  
+这套脚本安装一个3台机器的zookeeper、kafka、storm、hadoop集群，从无到有都只需要4分钟，而且脚本极其简单。  
 
 # 开发规则
 
@@ -31,7 +31,8 @@ vagrant-hostmanager
 
 ansible-playbook --tags=start/restart/stop/status opt/zookeeper.yml  
 ansible-playbook --tags=start/restart/stop/status opt/hadoop.yml  
-ansible-playbook --tags=start-ui/start-nimbus/start-supervisor/status opt/storm.yml  
+ansible-playbook --tags=start/stop/status opt/storm.yml  
+ansible-playbook --tags=start/status opt/kafka.yml 
 
 # 初始化hadoop
 
@@ -60,3 +61,11 @@ ansible-playbook --tags=formatzkfc opt/hadoop.yml
 | node1  | Y      | Y    |            |   Y      |
 | node2  |        | Y    |  Y         |          |
 | node3  |        | Y    |  Y         |          |
+
+## kafka
+
+| 主机名  | kafka  | zk   | 
+| ------ | ----   | ---- | 
+| node1  | Y      | Y    | 
+| node2  | Y      | Y    | 
+| node3  | Y      | Y    | 

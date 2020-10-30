@@ -38,3 +38,8 @@ host1
 [supervisor]
 host2
 host3
+
+[kafka]
+host1
+host2
+host3

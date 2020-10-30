@@ -1,0 +1,14 @@
+---
+
+- name: 创建kafka-logs目录
+  file: path=/vagrant/tools/kafka/kafka-logs state=directory
+
+- name: 配置server.properties
+  template:
+    src: server.properties.j2
+    dest: /vagrant/tools/kafka/config/server.properties
+    mode: 0760
+
+- name: 设置kafka环境变量
+  template : src=kafka.sh.j2 dest=/etc/profile.d/kafka.sh
+  become: yes

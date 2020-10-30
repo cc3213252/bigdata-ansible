@@ -21,7 +21,11 @@ storm.zookeeper.servers:
 {% endfor %}
 
 # 
-nimbus.seeds: ["{{ groups['nimbus'][0] }}"]
+# nimbus.seeds: ["{{ groups['nimbus'][0] }}"]
+
+# 0.9.2版本用下面这个配置
+nimbus.host: "{{ groups['nimbus'][0] }}"
+
 storm.local.dir: "/vagrant/tools/storm/status"
 supervisor.slots.ports:
     - 6700
