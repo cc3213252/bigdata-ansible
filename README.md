@@ -36,6 +36,15 @@ ansible-playbook --tags=start/stop/status opt/kafka.yml
 
 # 初始化hadoop
 
+ansible-playbook --tags=startjn opt/hadoop.yml  
+ansible-playbook --tags=formatnn opt/hadoop.yml  
+ansible-playbook --tags=startnn opt/hadoop.yml  
+ansible-playbook --tags=syncnn opt/hadoop.yml  
+ansible-playbook --tags=startsnn opt/hadoop.yml  
+ansible-playbook --tags=status opt/hadoop.yml 
+
+# 初始化hadoop-ha
+
 ansible-playbook --tags=startjn opt/hadoop-ha.yml  
 ansible-playbook --tags=formatnn opt/hadoop-ha.yml  
 ansible-playbook --tags=startnn opt/hadoop-ha.yml  
@@ -52,11 +61,11 @@ ansible-playbook install/dev/testplay.yml
 
 ## hadoop
 
-| 主机名  | nn   | rm   | dn   | nm   | 
-| ------ | ---- | ---- | ---- | ---- | 
-| host1  | Y    | Y    |      |      | 
-| host2  |      |      |  Y   | Y    | 
-| host3  |      |      |  Y   | Y    | 
+| 主机名  | nn   | rm   | dn   | nm   | jn   |
+| ------ | ---- | ---- | ---- | ---- | ---- |
+| host1  | Y    | Y    |      |      | Y    |
+| host2  | Y    |      |  Y   | Y    | Y    |
+| host3  |      |      |  Y   | Y    | Y    |
 
 ## hadoop-ha
 
@@ -84,6 +93,7 @@ ansible-playbook install/dev/testplay.yml
 
 ## 遗留问题
 
-无法脚本启动journalnode、namenode，可以手动启动  
+无法脚本启动journalnode、namenode，可以手动启动，可以脚本停止    
 格式化zkfc报错  
-无法启动datanode  
+
+hadoop初始化过程中无法通过脚本启动服务，初始化完成后，可以通过start/stop-dfs.sh启停服务   

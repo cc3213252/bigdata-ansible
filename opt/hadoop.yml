@@ -1,10 +1,20 @@
 ---
-#### 初始化
+- hosts: journalnode
+  tasks:
+    - name: start jn
+      shell: hadoop-daemon.sh start journalnode
+  tags: startjn
+
+- hosts: journalnode
+  tasks:
+    - name: stop journalnode
+      shell: hadoop-daemon.sh stop journalnode
+  tags: stopjn
 
 - hosts: namenode
   tasks:
-    - name: format namenode
-      shell: hdfs namenode -format mycluster
+    - name: format main_namenode
+      shell: hdfs namenode -format
       register: format_info
 
     - name: print format_info
@@ -12,31 +22,56 @@
         msg: "{{ format_info.stdout }}"
   tags: formatnn
 
-### 维护命令
+- hosts: namenode
+  tasks:
+    - name: start main_namenode
+      shell: hadoop-daemon.sh start namenode
+
+    - name: jps
+      shell: jps
+      register: mainnn_info
+
+    - name: print mainnn_info
+      debug:
+        msg: "{{ mainnn_info.stdout }}"
+  tags: startnn
+
+- hosts: standby-namenode
+  tasks:
+    - name: sync standby-namenode
+      shell: hdfs namenode -bootstrapStandby
+  tags: syncnn
+
+- hosts: standby-namenode
+  tasks:
+    - name: start standby-namenode
+      shell: hadoop-daemon.sh start namenode
+
+    - name: jps
+      shell: jps
+      register: snn_info
+
+    - name: print snn_info
+      debug:
+        msg: "{{ snn_info.stdout }}"
+  tags: startsnn
+
 - hosts: namenode
   tasks:
     - name: start dfs
       shell: start-dfs.sh
-    - name: start yarn
-      shell: start-yarn.sh
-    - name: start job history
-      shell: mapred --daemon start historyserver
   tags: start
 
 - hosts: namenode
   tasks:
     - name: restart dfs
       shell: restart-dfs.sh
-    - name: restart yarn
-      shell: restart-yarn.sh
   tags: restart
 
 - hosts: namenode
   tasks:
     - name: stop dfs
       shell: stop-dfs.sh
-    - name: stop yarn
-      shell: stop-yarn.sh
   tags: stop
 
 - hosts: all
