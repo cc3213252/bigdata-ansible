@@ -5,12 +5,11 @@
    </property>
    <property>
        <name>yarn.resourcemanager.hostname</name>
-       <value>{{ groups['resource-manager'][0] }}:8030</value>
+       <value>{{ groups['resource-manager'][0] }}</value>
    </property>
-   <!-- Web Application proxy 安全任务 -->
    <property>
        <name>yarn.web-proxy.address</name>
-       <value>{{ groups['web-proxy'][0] }}:8031</value>
+       <value>{{ groups['web-proxy'][0] }}</value>
    </property>
    <!-- 开启日志 -->
    <property>

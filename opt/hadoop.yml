@@ -74,6 +74,18 @@
       shell: stop-dfs.sh
   tags: stop
 
+- hosts: namenode
+  tasks:
+    - name: start yarn
+      shell: start-yarn.sh
+  tags: startyn
+
+- hosts: namenode
+  tasks:
+    - name: stop yarn
+      shell: stop-yarn.sh
+  tags: stopyn
+
 - hosts: all
   tasks:
     - name: jps
