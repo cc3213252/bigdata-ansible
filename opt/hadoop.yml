@@ -58,6 +58,18 @@
 
 - hosts: namenode
   tasks:
+    - name: format zkfc
+      shell: hdfs zkfc -format
+      register: format_zkfc
+
+    - name: print format_zkfc
+      debug:
+        msg: "{{ format_zkfc.stdout }}"
+  tags: formatzkfc
+
+
+- hosts: namenode
+  tasks:
     - name: start dfs
       shell: start-dfs.sh
   tags: start

@@ -14,7 +14,9 @@
   file: path=/vagrant/tools/hadoop/{{item}}  state=directory
   loop:
     - data
-    - data/jn
+    - data/datanode
+    - data/namenode
+    - data/journalnode
     - data/tmp
 
 - name: config hadoop-env.sh
@@ -25,7 +27,7 @@
 - name: 配置worker
   template:
     src: workers.j2
-    dest: /vagrant/tools/hadoop/workers
+    dest: /vagrant/tools/hadoop/etc/hadoop/workers
 
 - name: 设置hadoop环境变量
   template : src=hadoop.sh.j2 dest=/etc/profile.d/hadoop.sh

@@ -1,43 +1,24 @@
 <configuration>
-
-   <property>
+  <property>
        <name>yarn.nodemanager.aux-services</name>
        <value>mapreduce_shuffle</value>
    </property>
-
    <property>
        <name>yarn.resourcemanager.hostname</name>
        <value>{{ groups['resource-manager'][0] }}</value>
    </property>
-
-   <!-- Web Application proxy 安全任务 -->
    <property>
        <name>yarn.web-proxy.address</name>
        <value>{{ groups['web-proxy'][0] }}</value>
    </property>
-
    <!-- 开启日志 -->
    <property>
        <name>yarn.log-aggregation-enable</name>
        <value>true</value>
    </property>
-
    <!-- 日志删除时间 -1禁用，单位为秒 -->
    	<property>
        <name>yarn.log-aggregation.retain-seconds</name>
        <value>604800</value>
    </property>
-
-   <!-- yarn内存-->
-   <property>
-      <name>yarn.nodemanager.resource.memory-mb</name>
-      <value>8192</value>
-   </property>
-
-   <!-- yarn cpu-->
-   <property>
-      <name>yarn.nodemanager.resource.cpu-vcores</name>
-      <value>1</value>
-   </property>
-
 </configuration>

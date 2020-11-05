@@ -17,15 +17,16 @@ vagrant-hostmanager
 
 # 使用说明
 
-1、默认在tools目录下下载好、解压、并重命名为jdk、zookeeper、hadoop  
+1、默认在tools目录下下载好、解压、并重命名为jdk、zookeeper、hadoop、storm、kafka    
 2、配置Vagrantfile中host  
 3、配置install/inventory/hosts  
-4、vagrant up  
+4、playbook.yml中注释掉不安装的脚本
+5、vagrant up  
 
 # 脚本说明
 
 默认全部安装，vagrant相关的脚本只完成安装  
-使用vagrant reload或者vagrant halt，下次启动会还原成一个干净的系统，不想还原请用vagrant suspend/resume
+使用vagrant reload或者vagrant halt，下次启动会还原成一个干净的系统，不想还原请用vagrant suspend/resume  
 
 # 服务操作
 
@@ -34,24 +35,6 @@ ansible-playbook --tags=start/restart/stop/status opt/hadoop.yml
 ansible-playbook --tags=start/stop/status opt/storm.yml  
 ansible-playbook --tags=start/stop/status opt/kafka.yml 
 
-# 初始化hadoop
-
-ansible-playbook --tags=startjn opt/hadoop.yml  
-ansible-playbook --tags=formatnn opt/hadoop.yml  
-ansible-playbook --tags=startnn opt/hadoop.yml  
-ansible-playbook --tags=syncnn opt/hadoop.yml  
-ansible-playbook --tags=startsnn opt/hadoop.yml  
-ansible-playbook --tags=status opt/hadoop.yml 
-
-# 初始化hadoop-ha
-
-ansible-playbook --tags=startjn opt/hadoop-ha.yml  
-ansible-playbook --tags=formatnn opt/hadoop-ha.yml  
-ansible-playbook --tags=startnn opt/hadoop-ha.yml  
-ansible-playbook --tags=syncnn opt/hadoop-ha.yml  
-ansible-playbook --tags=startsnn opt/hadoop-ha.yml  
-ansible-playbook --tags=status opt/hadoop-ha.yml  
-ansible-playbook --tags=formatzkfc opt/hadoop-ha.yml  
 
 # 脚本测试
 
@@ -69,11 +52,12 @@ ansible-playbook install/dev/testplay.yml
 
 ## hadoop-ha
 
-| 主机名  | nn   | zk   | dn   | zfkc | jn   |
-| ------ | ---- | ---- | ---- | ---- | ---- |
-| host1  | Y    | Y    |      | Y    | Y    |
-| host2  | Y    | Y    |  Y   | Y    | Y    |
-| host3  |      | Y    |  Y   |      | Y    |
+| 主机名  | nn   | rm   | dn   | nm   | jn   | web-proxy | zfkc |
+| ------ | ---- | ---- | ---- | ---- | ---- | ----      | ---- |
+| host1  | Y    | Y    |      |      | Y    |  Y        | Y    |
+| host2  | Y    |      |  Y   | Y    | Y    |           | Y    |
+| host3  |      |      |  Y   | Y    | Y    |           |      |
+
 
 ## storm
 
@@ -91,9 +75,4 @@ ansible-playbook install/dev/testplay.yml
 | host2  | Y      | Y    | 
 | host3  | Y      | Y    | 
 
-## 遗留问题
-
-无法脚本启动journalnode、namenode，可以手动启动，可以脚本停止    
-格式化zkfc报错  
-
-hadoop初始化过程中无法通过脚本启动服务，初始化完成后，可以通过start/stop-dfs.sh启停服务   
+ 

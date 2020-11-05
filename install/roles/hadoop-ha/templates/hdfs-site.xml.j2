@@ -12,19 +12,24 @@
       <value>nn1, nn2</value>
     </property>
 
-    {% for host in groups['ha-namenode'] %}
-        <!-- 配置nn1,nn2的rpc通信-->
-        <property>
-            <name>dfs.namenode.rpc-address.mycluster.nn{{ loop.index }}</name>
-            <value>{{ host }}:8020</value>
-        </property>
-
-        <!-- 配置nn1,nn2的http访问端口-->
-        <property>
-          <name>dfs.namenode.http-address.mycluster.nn{{ loop.index }}</name>
-          <value>{{ host }}:50070</value>
-        </property>
-    {% endfor %}
+    <!-- 配置nn1,nn2的rpc通信-->
+    <property>
+        <name>dfs.namenode.rpc-address.mycluster.nn1</name>
+        <value>{{ groups['namenode'][0] }}:8020</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.mycluster.nn2</name>
+        <value>{{ groups['standby-namenode'][0] }}:8020</value>
+    </property>
+    <!-- 配置nn1,nn2的http访问端口-->
+    <property>
+      <name>dfs.namenode.http-address.mycluster.nn1</name>
+      <value>{{ groups['namenode'][0] }}:50070</value>
+    </property>
+    <property>
+      <name>dfs.namenode.http-address.mycluster.nn2</name>
+      <value>{{ groups['standby-namenode'][0] }}:50070</value>
+    </property>
 
 
     <!-- 指定namenode的元数据存储在journalnode中的路径-->

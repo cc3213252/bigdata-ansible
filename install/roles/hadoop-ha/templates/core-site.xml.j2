@@ -1,18 +1,16 @@
 <configuration>
-    <!-- 指定nameservice的名称为mycluster -->
+    <!-- 指定 namenode 的 hdfs 协议文件系统的通信地址 -->
     <property>
       <name>fs.defaultFS</name>
       <value>hdfs://mycluster</value>
     </property>
-    <!-- 编辑日志文件存储的路径 -->
     <property>
       <name>dfs.journalnode.edits.dir</name>
-      <value>/vagrant/tools/hadoop/data/jn</value>
+      <value>/vagrant/tools/hadoop/data/journalnode</value>
     </property>
     <!-- 配置缓存文件的目录 -->
     <property>
         <name>hadoop.tmp.dir</name>
         <value>/vagrant/tools/hadoop/data/tmp</value>
-        <description>Abase for other temporary directories.</description>
     </property>
 </configuration>

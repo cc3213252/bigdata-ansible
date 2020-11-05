@@ -6,29 +6,29 @@
   tags:
     - common
 
-#- hosts: zookeeper
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: zookeeper
-#  tags:
-#    - zookeeper
-#
-#- hosts: hadoop
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: hadoop-ha
-#  tags:
-#    - hadoop-ha
+- hosts: zookeeper
+  gather_facts: true
+  become: false
+  roles:
+    - role: zookeeper
+  tags:
+    - zookeeper
 
 - hosts: hadoop
   gather_facts: true
   become: false
   roles:
-    - role: hadoop
+    - role: hadoop-ha
   tags:
-    - hadoop
+    - hadoop-ha
+
+#- hosts: hadoop
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: hadoop
+#  tags:
+#    - hadoop
 
 #- hosts: storm
 #  gather_facts: true
