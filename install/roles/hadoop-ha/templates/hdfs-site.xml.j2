@@ -5,58 +5,74 @@
       <name>dfs.nameservices</name>
       <value>mycluster</value>
     </property>
+
     <!-- 指定mycluster的两个namenode的名称nn1,nn2-->
     <property>
       <name>dfs.ha.namenodes.mycluster</name>
       <value>nn1, nn2</value>
     </property>
-    <!-- 配置nn1,nn2的rpc通信-->
-    <property>
-        <name>dfs.namenode.rpc-address.mycluster.nn1</name>
-        <value>{{ groups['namenode'][0] }}:8020</value>
-    </property>
-    <property>
-        <name>dfs.namenode.rpc-address.mycluster.nn2</name>
-        <value>{{ groups['standby-namenode'][0] }}:8020</value>
-    </property>
-    <!-- 配置nn1,nn2的http访问端口-->
-    <property>
-      <name>dfs.namenode.http-address.mycluster.nn1</name>
-      <value>{{ groups['namenode'][0] }}:50070</value>
-    </property>
-    <property>
-      <name>dfs.namenode.http-address.mycluster.nn2</name>
-      <value>{{ groups['standby-namenode'][0] }}:50070</value>
-    </property>
+
+    {% for host in groups['ha-namenode'] %}
+        <!-- 配置nn1,nn2的rpc通信-->
+        <property>
+            <name>dfs.namenode.rpc-address.mycluster.nn{{ loop.index }}</name>
+            <value>{{ host }}:8020</value>
+        </property>
+
+        <!-- 配置nn1,nn2的http访问端口-->
+        <property>
+          <name>dfs.namenode.http-address.mycluster.nn{{ loop.index }}</name>
+          <value>{{ host }}:50070</value>
+        </property>
+    {% endfor %}
+
+
     <!-- 指定namenode的元数据存储在journalnode中的路径-->
     <property>
       <name>dfs.namenode.shared.edits.dir</name>
       <value>qjournal://{% for host in groups['journalnode'] %}{{ host }}:8485{% if not loop.last %};{% endif %}{% endfor %}/mycluster</value>
     </property>
+
     <!-- 配置失败自动切换的方式-->
     <property>
       <name>dfs.client.failover.proxy.provider.mycluster</name>
       <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
     </property>
+
     <!-- 配置隔离机制-->
     <property>
       <name>dfs.ha.fencing.methods</name>
       <value>sshfence</value>
     </property>
+
     <!-- 配置密钥的位置-->
     <property>
       <name>dfs.ha.fencing.ssh.private-key-files</name>
       <value>/home/vagrant/.ssh/id_rsa</value>
     </property>
+
     <!-- 数据备份的个数-->
     <property>
       <name>dfs.replication</name>
       <value>2</value>
     </property>
+
     <!-- 关闭权限验证-->
     <property>
       <name>dfs.permissions.enabled</name>
       <value>false</value>
+    </property>
+
+    <!-- 开启失败故障自动转移 -->
+    <property>
+       <name>dfs.ha.automatic-failover.enabled</name>
+       <value>true</value>
+     </property>
+
+     <!-- 配置zookeeper地址 -->
+    <property>
+       <name>ha.zookeeper.quorum</name>
+       <value>{% for host in groups['zookeeper'] %}{{ host }}:2181{% if not loop.last %},{% endif %}{% endfor %}</value>
     </property>
 
 </configuration>

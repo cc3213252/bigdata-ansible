@@ -32,40 +32,58 @@ vagrant-hostmanager
 ansible-playbook --tags=start/restart/stop/status opt/zookeeper.yml  
 ansible-playbook --tags=start/restart/stop/status opt/hadoop.yml  
 ansible-playbook --tags=start/stop/status opt/storm.yml  
-ansible-playbook --tags=start/status opt/kafka.yml 
+ansible-playbook --tags=start/stop/status opt/kafka.yml 
 
 # 初始化hadoop
 
-ansible-playbook --tags=startjn opt/hadoop.yml  
-ansible-playbook --tags=formatnn opt/hadoop.yml  
-ansible-playbook --tags=startnn opt/hadoop.yml  
-ansible-playbook --tags=syncnn opt/hadoop.yml  
-ansible-playbook --tags=startsnn opt/hadoop.yml  
-ansible-playbook --tags=status opt/hadoop.yml  
-ansible-playbook --tags=formatzkfc opt/hadoop.yml  
+ansible-playbook --tags=startjn opt/hadoop-ha.yml  
+ansible-playbook --tags=formatnn opt/hadoop-ha.yml  
+ansible-playbook --tags=startnn opt/hadoop-ha.yml  
+ansible-playbook --tags=syncnn opt/hadoop-ha.yml  
+ansible-playbook --tags=startsnn opt/hadoop-ha.yml  
+ansible-playbook --tags=status opt/hadoop-ha.yml  
+ansible-playbook --tags=formatzkfc opt/hadoop-ha.yml  
+
+# 脚本测试
+
+ansible-playbook install/dev/testplay.yml  
 
 # 部署计划
 
 ## hadoop
 
+| 主机名  | nn   | rm   | dn   | nm   | 
+| ------ | ---- | ---- | ---- | ---- | 
+| host1  | Y    | Y    |      |      | 
+| host2  |      |      |  Y   | Y    | 
+| host3  |      |      |  Y   | Y    | 
+
+## hadoop-ha
+
 | 主机名  | nn   | zk   | dn   | zfkc | jn   |
 | ------ | ---- | ---- | ---- | ---- | ---- |
-| node1  | Y    | Y    |      | Y    | Y    |
-| node2  | Y    | Y    |  Y   | Y    | Y    |
-| node3  |      | Y    |  Y   |      | Y    |
+| host1  | Y    | Y    |      | Y    | Y    |
+| host2  | Y    | Y    |  Y   | Y    | Y    |
+| host3  |      | Y    |  Y   |      | Y    |
 
 ## storm
 
 | 主机名  | nimbus | zk   | supervisor | storm ui |
 | ------ | ----   | ---- | ----       | ----     |
-| node1  | Y      | Y    |            |   Y      |
-| node2  |        | Y    |  Y         |          |
-| node3  |        | Y    |  Y         |          |
+| host1  | Y      | Y    |            |   Y      |
+| host2  |        | Y    |  Y         |          |
+| host3  |        | Y    |  Y         |          |
 
 ## kafka
 
 | 主机名  | kafka  | zk   | 
 | ------ | ----   | ---- | 
-| node1  | Y      | Y    | 
-| node2  | Y      | Y    | 
-| node3  | Y      | Y    | 
+| host1  | Y      | Y    | 
+| host2  | Y      | Y    | 
+| host3  | Y      | Y    | 
+
+## 遗留问题
+
+无法脚本启动journalnode、namenode，可以手动启动  
+格式化zkfc报错  
+无法启动datanode  

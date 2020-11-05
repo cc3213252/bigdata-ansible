@@ -4,3 +4,4 @@ install/*.retry
 ansible.log
 opt/*.retry
 .idea
+install/dev/*.retry

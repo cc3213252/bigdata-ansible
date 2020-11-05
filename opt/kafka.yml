@@ -17,3 +17,8 @@
         msg: "{{ server_mode.stdout }}"
   tags: status
 
+- hosts: kafka
+  tasks:
+    - name: stop kafka
+      shell: kafka-server-stop.sh
+  tags: stop

@@ -31,3 +31,33 @@
   selinux:
     state: disabled
   notify: Reload systemd
+
+- name: prepare known_hosts entries
+  shell: ssh-keyscan -t rsa {{ item }}
+  with_items: "{{ groups['all'] }}"
+  register: keyscans
+
+- name: prepare known_hosts
+  lineinfile:
+    dest=/home/vagrant/.ssh/known_hosts
+    create=yes
+    state=present
+    line="{{ item.stdout }}"
+    regexp="^{{ item.item }}"
+    owner=vagrant
+    group=vagrant
+  with_items: "{{ keyscans.results }}"
+
+- name: prepare known_hosts entries
+  shell: ssh-keyscan -t rsa 0.0.0.0
+  register: keyscan_0_0_0_0
+
+- name: add 0.0.0.0 to known_hosts for secondary namenode
+  lineinfile:
+    dest=/home/vagrant/.ssh/known_hosts
+    create=yes
+    state=present
+    line="{{ keyscan_0_0_0_0.stdout }}"
+    regexp="^0.0.0.0"
+    owner=vagrant
+    group=vagrant

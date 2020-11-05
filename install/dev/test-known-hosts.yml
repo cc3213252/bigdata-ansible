@@ -1,0 +1,12 @@
+
+- hosts: all
+  gather_facts: true
+  tasks:
+    - name: prepare known_hosts entries
+      shell: ssh-keyscan -t rsa {{ item }}
+      with_items: "{{ groups['all'] }}"
+      register: keyscans
+
+    - debug:
+        msg: "{{ keyscans }}"
+

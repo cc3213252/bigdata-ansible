@@ -14,9 +14,7 @@
   file: path=/vagrant/tools/hadoop/{{item}}  state=directory
   loop:
     - data
-    - data/datanode
-    - data/namenode
-    - data/journalnode
+    - data/jn
     - data/tmp
 
 - name: config hadoop-env.sh
