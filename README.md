@@ -75,4 +75,19 @@ ansible-playbook install/dev/testplay.yml
 | host2  | Y      | Y    | 
 | host3  | Y      | Y    | 
 
- 
+## elasticsearch
+
+| 主机名  | master | client| 
+| ------ | ----   | ---- | 
+| host1  | Y      |      | 
+| host2  |        | Y    | 
+| host3  |        | Y    | 
+
+## 已经测试过的版本
+
+java 1.8  
+zookeeper 3.6.2  
+storm 0.9.2（storm.yaml要改），1.2.1，2.2.0  
+kafka 2.6.0  
+hadoop 3.2.1  
+elasticsearch 7.9.3  
