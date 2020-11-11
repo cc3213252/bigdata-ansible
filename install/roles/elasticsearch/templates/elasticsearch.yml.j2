@@ -1,0 +1,20 @@
+
+cluster.name: my-application
+node.name: host{% for host in groups['elasticsearch'] %}{% if host == ansible_hostname %}{{loop.index}}{% endif %}{% endfor %}
+
+path.data: /vagrant/tools/elasticsearch/data
+path.logs: /vagrant/tools/elasticsearch/logs
+
+network.host: host{% for host in groups['elasticsearch'] %}{% if host == ansible_hostname %}{{loop.index}}{% endif %}{% endfor %}
+
+#discovery.seed_hosts: [{% for host in groups['elasticsearch'] %}"{{ host }}"{% if not loop.last %},{% endif %}{% endfor %}]
+
+discovery.seed_hosts:
+{% for host in groups['elasticsearch'] %}
+    - "{{ host }}"
+{% endfor %}
+
+cluster.initial_master_nodes:
+{% for host in groups['es-master'] %}
+    - "{{ host }}"
+{% endfor %}

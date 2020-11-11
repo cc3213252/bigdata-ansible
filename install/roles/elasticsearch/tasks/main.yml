@@ -1,0 +1,28 @@
+---
+
+- name: 创建目录
+  file: path=/vagrant/tools/elasticsearch/{{item}}  state=directory
+  loop:
+    - data
+
+- name: 配置elasticsearch.yml
+  template:
+    src: elasticsearch.yml.j2
+    dest: /vagrant/tools/elasticsearch/config/elasticsearch.yml
+    mode: 0760
+
+- name: 设置elasticsearch环境变量
+  template : src=elasticsearch.sh.j2 dest=/etc/profile.d/elasticsearch.sh
+  become: yes
+
+- name: 增加创建文件描述权限
+  template : src=limits.conf.j2 dest=/etc/security/limits.conf
+  become: yes
+
+- name: 增加内存权限
+  template : src=sysctl.conf.j2 dest=/etc/sysctl.conf
+  become: yes
+
+- name: 加载参数
+  shell : sysctl -p
+  become: yes

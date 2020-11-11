@@ -18,6 +18,11 @@ host1
 host2
 host3
 
+[elasticsearch]
+host1
+host2
+host3
+
 [nimbus]
 host1
 
@@ -53,3 +58,6 @@ host2
 host1
 host2
 host3
+
+[es-master]
+host1

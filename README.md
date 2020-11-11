@@ -20,7 +20,7 @@ vagrant-hostmanager
 1、默认在tools目录下下载好、解压、并重命名为jdk、zookeeper、hadoop、storm、kafka    
 2、配置Vagrantfile中host  
 3、配置install/inventory/hosts  
-4、playbook.yml中注释掉不安装的脚本
+4、playbook.yml中注释掉不安装的脚本  
 5、vagrant up  
 
 # 脚本说明

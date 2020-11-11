@@ -6,21 +6,21 @@
   tags:
     - common
 
-- hosts: zookeeper
-  gather_facts: true
-  become: false
-  roles:
-    - role: zookeeper
-  tags:
-    - zookeeper
-
-- hosts: hadoop
-  gather_facts: true
-  become: false
-  roles:
-    - role: hadoop-ha
-  tags:
-    - hadoop-ha
+#- hosts: zookeeper
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: zookeeper
+#  tags:
+#    - zookeeper
+#
+#- hosts: hadoop
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: hadoop-ha
+#  tags:
+#    - hadoop-ha
 
 #- hosts: hadoop
 #  gather_facts: true
@@ -45,3 +45,11 @@
 #    - role: kafka
 #  tags:
 #    - kafka
+
+- hosts: elasticsearch
+  gather_facts: true
+  become: false
+  roles:
+    - role: elasticsearch
+  tags:
+    - elasticsearch
