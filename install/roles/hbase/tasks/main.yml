@@ -1,0 +1,36 @@
+---
+
+- name: create zk data directory
+  file: path=/vagrant/tools/hbase/{{item}}  state=directory
+  loop:
+    - data
+    - data/zookeeper
+
+- name: 拷贝hbase-env.sh
+  copy:
+    src: hbase-env.sh
+    dest: "/vagrant/tools/hbase/conf/"
+    mode: 0600
+
+- name: 配置hbase-site.xml
+  template:
+    src: hbase-site.xml.j2
+    dest: /vagrant/tools/hbase/conf/hbase-site.xml
+    mode: 0760
+
+- name: 配置regionservers
+  template:
+    src: regionservers.j2
+    dest: /vagrant/tools/hbase/conf/regionservers
+    mode: 0760
+
+- name: 配置backup-masters
+  template:
+    src: backup-masters.j2
+    dest: /vagrant/tools/hbase/conf/backup-masters
+    mode: 0760
+
+- name: 设置hbase环境变量
+  template : src=hbase.sh.j2 dest=/etc/profile.d/hbase.sh
+  become: yes
+

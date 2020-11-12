@@ -1,0 +1,31 @@
+---
+- hosts: hmaster
+  tasks:
+    - name: start cluster
+      shell: start-hbase.sh
+
+#    - name: start hmaster
+#      shell: hbase-daemon.sh start master
+  tags: start
+
+- hosts: hmaster
+  tasks:
+    - name: stop hbase
+      shell: stop-hbase.sh
+
+    - name: stop hmaster
+      shell: hbase-daemon.sh stop master
+  tags: stop
+
+
+- hosts: all
+  tasks:
+    - name: jps
+      shell: jps
+      register: jps_mode
+
+    - name: print jps_mode
+      debug:
+        msg: "{{ jps_mode.stdout }}"
+  tags: status
+

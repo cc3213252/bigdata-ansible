@@ -1,0 +1,21 @@
+<configuration>
+    <property>
+      <name>hbase.cluster.distributed</name>
+      <value>true</value>
+    </property>
+
+    <property>
+      <name>hbase.rootdir</name>
+      <value>hdfs://{{ groups['namenode'][0] }}:8020/hbase</value>
+    </property>
+
+    <property>
+       <name>hbase.zookeeper.quorum</name>
+       <value>{% for host in groups['zookeeper'] %}{{ host }}:2181{% if not loop.last %},{% endif %}{% endfor %}</value>
+    </property>
+
+    <property>
+      <name>hbase.zookeeper.property.dataDir</name>
+      <value>/vagrant/tools/hbase/data/zookeeper</value>
+    </property>
+</configuration>

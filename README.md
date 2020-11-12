@@ -84,6 +84,14 @@ ansible-playbook install/dev/testplay.yml
 | host2  |        | Y    | 
 | host3  |        | Y    | 
 
+## hbase
+
+| 主机名  | master | zk   | backup-master | region-server |
+| ------ | ----   | ---- | ----          | ----          |
+| host1  | Y      | Y    |               |               |
+| host2  |        | Y    |  Y            |      Y        |
+| host3  |        | Y    |               |      Y        |
+
 ## 已经测试过的版本
 
 java 1.8  
@@ -92,3 +100,4 @@ storm 0.9.2（storm.yaml要改），1.2.1，2.2.0
 kafka 2.6.0  
 hadoop 3.2.1  
 elasticsearch 7.9.3  
+hbase 2.3.3  

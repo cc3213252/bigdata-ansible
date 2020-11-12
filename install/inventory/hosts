@@ -23,6 +23,11 @@ host1
 host2
 host3
 
+[hbase]
+host1
+host2
+host3
+
 [nimbus]
 host1
 
@@ -61,3 +66,13 @@ host3
 
 [es-master]
 host1
+
+[hmaster]
+host1
+
+[backup-master]
+host2
+
+[region-server]
+host2
+host3
