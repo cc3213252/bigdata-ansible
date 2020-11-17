@@ -8,22 +8,14 @@ host1
 host2
 host3
 
+[kafka]
+host1
+host2
+host3
+
+# storm配置文件
+
 [storm]
-host1
-host2
-host3
-
-[hadoop]
-host1
-host2
-host3
-
-[elasticsearch]
-host1
-host2
-host3
-
-[hbase]
 host1
 host2
 host3
@@ -35,7 +27,9 @@ host1
 host2
 host3
 
-[kafka]
+# hadoop配置文件
+
+[hadoop]
 host1
 host2
 host3
@@ -64,8 +58,22 @@ host1
 host2
 host3
 
+# es配置文件
+
+[elasticsearch]
+host1
+host2
+host3
+
 [es-master]
 host1
+
+# hbase配置文件
+
+[hbase]
+host1
+host2
+host3
 
 [hmaster]
 host1
@@ -74,5 +82,22 @@ host1
 host2
 
 [region-server]
+host2
+host3
+
+# flink配置文件
+
+[flink]
+host1
+host2
+host3
+
+[jobmanager]
+host1
+
+[taskmanager]
+host2
+
+[slaves]
 host2
 host3

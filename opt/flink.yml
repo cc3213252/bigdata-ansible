@@ -1,0 +1,24 @@
+---
+- hosts: flink
+  tasks:
+    - name: start flink
+      shell: start-cluster.sh
+  tags: start
+
+- hosts: flink
+  tasks:
+    - name: stop flink
+      shell: stop-cluster.sh
+  tags: stop
+
+- hosts: flink
+  tasks:
+    - name: jps
+      shell: jps
+      register: server_mode
+
+    - name: print status
+      debug:
+        msg: "{{ server_mode.stdout }}"
+  tags: status
+

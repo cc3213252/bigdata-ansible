@@ -6,13 +6,13 @@
   tags:
     - common
 
-- hosts: zookeeper
-  gather_facts: true
-  become: false
-  roles:
-    - role: zookeeper
-  tags:
-    - zookeeper
+#- hosts: zookeeper
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: zookeeper
+#  tags:
+#    - zookeeper
 #
 #- hosts: hadoop
 #  gather_facts: true
@@ -22,13 +22,13 @@
 #  tags:
 #    - hadoop-ha
 
-- hosts: hadoop
-  gather_facts: true
-  become: false
-  roles:
-    - role: hadoop
-  tags:
-    - hadoop
+#- hosts: hadoop
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: hadoop
+#  tags:
+#    - hadoop
 
 #- hosts: storm
 #  gather_facts: true
@@ -54,10 +54,18 @@
 #  tags:
 #    - elasticsearch
 
-- hosts: hbase
+#- hosts: hbase
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: hbase
+#  tags:
+#    - hbase
+
+- hosts: flink
   gather_facts: true
   become: false
   roles:
-    - role: hbase
+    - role: flink-standalone
   tags:
-    - hbase
+    - flink-standalone

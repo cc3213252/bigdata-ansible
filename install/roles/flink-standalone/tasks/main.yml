@@ -1,0 +1,17 @@
+---
+
+- name: 配置flink-conf.yaml
+  template:
+    src: flink-conf.yaml.j2
+    dest: /vagrant/tools/flink/conf/flink-conf.yaml
+    mode: 0760
+
+- name: 配置slaves
+  template:
+    src: slaves.j2
+    dest: /vagrant/tools/flink/conf/slaves
+
+- name: 设置flink环境变量
+  template : src=flink.sh.j2 dest=/etc/profile.d/flink.sh
+  become: yes
+
