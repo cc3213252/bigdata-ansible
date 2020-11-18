@@ -93,6 +93,14 @@ ansible-playbook install/dev/testplay.yml
 | host2  |        | Y    |  Y            |      Y        |
 | host3  |        | Y    |               |      Y        |
 
+## flink-standalone
+
+| 主机名  | Standalone | TaskManagerRunner | 
+| ------ | ----   | ----       | 
+| host1  | Y      |            |   
+| host2  |        |  Y         |   
+| host3  |        |  Y         | 
+
 ## 已经测试过的版本
 
 java 1.8  
@@ -102,4 +110,4 @@ kafka 2.6.0
 hadoop 3.2.1  
 elasticsearch 7.9.3  
 hbase 2.3.3  
-flink 1.6.1  
+flink 1.6.1，1.11.2    

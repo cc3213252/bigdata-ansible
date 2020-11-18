@@ -1,15 +1,21 @@
 ---
-- hosts: flink
+- hosts: jobmanager
   tasks:
-    - name: start flink
+    - name: start flink standalone
       shell: start-cluster.sh
-  tags: start
+  tags: start-alone
 
-- hosts: flink
+- hosts: jobmanager
   tasks:
     - name: stop flink
       shell: stop-cluster.sh
-  tags: stop
+  tags: stop-alone
+
+- hosts: jobmanager
+  tasks:
+    - name: start flink yarn
+      shell: yarn-session.sh -n 2 -s 1 -jm 100 -tm 100 -nm test -d
+  tags: start-yarn
 
 - hosts: flink
   tasks:

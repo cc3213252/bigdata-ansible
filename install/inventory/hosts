@@ -98,6 +98,6 @@ host1
 [taskmanager]
 host2
 
-[slaves]
+[flink-workers]
 host2
 host3

@@ -22,13 +22,13 @@
 #  tags:
 #    - hadoop-ha
 
-#- hosts: hadoop
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: hadoop
-#  tags:
-#    - hadoop
+- hosts: hadoop
+  gather_facts: true
+  become: false
+  roles:
+    - role: hadoop
+  tags:
+    - hadoop
 
 #- hosts: storm
 #  gather_facts: true
@@ -66,6 +66,6 @@
   gather_facts: true
   become: false
   roles:
-    - role: flink-standalone
+    - role: flink
   tags:
-    - flink-standalone
+    - flink

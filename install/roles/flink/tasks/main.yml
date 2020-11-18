@@ -6,10 +6,10 @@
     dest: /vagrant/tools/flink/conf/flink-conf.yaml
     mode: 0760
 
-- name: 配置slaves
+- name: 配置workers
   template:
-    src: slaves.j2
-    dest: /vagrant/tools/flink/conf/slaves
+    src: workers.j2
+    dest: /vagrant/tools/flink/conf/workers
 
 - name: 设置flink环境变量
   template : src=flink.sh.j2 dest=/etc/profile.d/flink.sh
