@@ -101,6 +101,14 @@ ansible-playbook install/dev/testplay.yml
 | host2  |        |  Y         |   
 | host3  |        |  Y         | 
 
+## flink-yarn
+
+| 主机名  | nn   | rm   | dn   | nm   | jn   | web-proxy | yarn-session | yarn-session-cli |
+| ------ | ---- | ---- | ---- | ---- | ---- | ----      | ----         |  ----            |
+| host1  | Y    | Y    |      |      | Y    |  Y        |              |   Y              |
+| host2  | Y    |      |  Y   | Y    | Y    |           |    Y         |                  |
+| host3  |      |      |  Y   | Y    | Y    |           |              |                  |
+
 ## 已经测试过的版本
 
 java 1.8  

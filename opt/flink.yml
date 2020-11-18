@@ -14,7 +14,7 @@
 - hosts: jobmanager
   tasks:
     - name: start flink yarn
-      shell: yarn-session.sh -n 2 -s 1 -jm 100 -tm 100 -nm test -d
+      shell: export HADOOP_CLASSPATH=`hadoop classpath` | yarn-session.sh -n 2 -s 1 -jm 100 -tm 100 -nm test
   tags: start-yarn
 
 - hosts: flink
