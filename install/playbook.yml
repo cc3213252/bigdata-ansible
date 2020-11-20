@@ -22,13 +22,13 @@
 #  tags:
 #    - hadoop-ha
 
-- hosts: hadoop
-  gather_facts: true
-  become: false
-  roles:
-    - role: hadoop
-  tags:
-    - hadoop
+#- hosts: hadoop
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: hadoop
+#  tags:
+#    - hadoop
 
 #- hosts: storm
 #  gather_facts: true
@@ -62,10 +62,35 @@
 #  tags:
 #    - hbase
 
-- hosts: flink
+#- hosts: flink
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: flink
+#  tags:
+#    - flink
+
+#- hosts: ambari
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: ambari-common
+#  tags:
+#    - ambari-common
+
+- hosts: ambari-server
   gather_facts: true
   become: false
   roles:
-    - role: flink
+    - role: ambari-server
   tags:
-    - flink
+    - ambari-server
+
+- hosts: ambari-agent
+  gather_facts: true
+  become: false
+  roles:
+    - role: ambari-agent
+  tags:
+    - ambari-agent
+

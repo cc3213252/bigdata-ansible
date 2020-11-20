@@ -1,0 +1,18 @@
+---
+
+- name: install RPM
+  shell: rpm -ivh /vagrant/tools/ambari/{{item}}
+  become: true
+  loop:
+    - ambari-agent-2.7.4.0-118.x86_64.rpm
+
+- name: 配置server地址
+  template : src=ambari-agent.ini.j2 dest=/etc/ambari-agent/conf/ambari-agent.ini
+  become: yes
+
+- name: start ambari-agent...
+  systemd:
+    name: ambari-agent
+    state: started
+    enabled: yes
+  become: yes

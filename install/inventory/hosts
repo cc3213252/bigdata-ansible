@@ -101,3 +101,17 @@ host2
 [flink-workers]
 host2
 host3
+
+# ambari配置文件
+
+[ambari]
+host1
+host2
+host3
+
+[ambari-server]
+host1
+
+[ambari-agent]
+host2
+host3

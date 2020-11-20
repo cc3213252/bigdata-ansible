@@ -1,0 +1,62 @@
+---
+
+#- name: install RPM
+#  shell: rpm -ivh /vagrant/tools/ambari/{{item}}
+#  become: true
+#  loop:
+#    - mysql57-community-release-el7-8.noarch.rpm
+#    - postgresql-libs-9.2.24-4.el7_8.x86_64.rpm
+#    - postgresql-9.2.24-4.el7_8.x86_64.rpm
+#    - postgresql-server-9.2.24-4.el7_8.x86_64.rpm
+#    - ambari-server-2.7.4.0-118.x86_64.rpm
+##    - mysql-community-common-5.7.32-1.el7.i686.rpm
+##    - mysql-community-client-5.7.32-1.el7.i686.rpm
+##    - mysql-community-server-5.7.32-1.el7.x86_64.rpm
+#
+#- name: install mysql-community-server
+#  yum: name={{ item }}  state=present
+#  become: yes
+#  loop:
+#    - mysql-community-server
+#    - mysql-connector-java*
+
+- name: start_mysql...
+  systemd:
+    name: mysqld.service
+    state: started
+    enabled: yes
+  become: yes
+
+- name: reset_mysql_pwd...
+  shell: mysql -uroot -p`cat /var/log/mysqld.log | grep 'password is generated' | awk '{print $NF}'` --connect-expired-password -e "alter user root@localhost identified by '{{mysql_passwprd}}';"
+  ignore_errors: true
+
+- name: init_mysql1...
+  copy: src=init_mysql.sql  dest=/vagrant/tools/ambari/
+
+- name: init_mysql2...
+  shell: mysql -uroot -p{{mysql_passwprd}} --connect-expired-password -e "source /vagrant/tools/ambari/init_mysql.sql"
+  ignore_errors: true
+
+- name: prepare jdk
+  shell: mv /vagrant/tools/ambari/{{item}} /var/lib/ambari-server/resources/
+  become: true
+  loop:
+    - jdk-8u112-linux-x64.tar.gz
+    - jce_policy-8.zip
+
+- name: setup_server1...
+  shell: echo -e "\n\n\n\n" | ambari-server setup
+  become: yes
+
+- name: setup_server2...
+  shell: ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
+  become: yes
+
+- name: start ambari-server...
+  systemd:
+    name: ambari-server
+    state: started
+    enabled: yes
+  become: yes
+

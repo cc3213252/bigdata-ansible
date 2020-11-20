@@ -33,9 +33,9 @@ vagrant-hostmanager
 ansible-playbook --tags=start/restart/stop/status opt/zookeeper.yml  
 ansible-playbook --tags=start/restart/stop/status opt/hadoop.yml  
 ansible-playbook --tags=start/stop/status opt/storm.yml  
-ansible-playbook --tags=start/stop/status opt/kafka.yml 
+ansible-playbook --tags=start/stop/status opt/kafka.yml   
 ansible-playbook --tags=start/stop/status opt/elasticsearch.yml  
-ansible-playbook --tags=start/stop/status opt/hbase.yml 
+ansible-playbook --tags=start/stop/status opt/hbase.yml   
 ansible-playbook --tags=start/stop/status opt/flink.yml 
 
 # 脚本测试

@@ -1,0 +1,38 @@
+---
+- hosts: ambari-server
+  tasks:
+    - name: restart ambari server
+      shell: ambari-server restart
+  become: yes
+  tags: restart-server
+
+- hosts: ambari-server
+  tasks:
+    - name: server status
+      shell: ambari-server status
+      become: yes
+      register: server_mode
+
+    - name: print status
+      debug:
+        msg: "{{ server_mode.stdout }}"
+  tags: status-server
+
+- hosts: ambari-agent
+  tasks:
+    - name: restart ambari agent
+      shell: ambari-agent restart
+  become: yes
+  tags: restart-agent
+
+- hosts: ambari-agent
+  tasks:
+    - name: agent status
+      shell: ambari-agent status
+      become: yes
+      register: server_mode
+
+    - name: print status
+      debug:
+        msg: "{{ server_mode.stdout }}"
+  tags: status-agent

@@ -1,0 +1,24 @@
+---
+
+- name: copy ambari repo...
+  copy: src=ambari.repo  dest=/etc/yum.repos.d/
+  become: yes
+
+- name: install ntp epel...
+  yum: name={{ item }} state=present
+  become: yes
+  loop:
+    - ntp
+    - epel-release
+    - openssl
+
+- name: set_time_sync...
+  systemd:
+    name: ntpd
+    state: started
+    enabled: yes
+  become: yes
+
+- name: set_default_file_perm...
+  shell: "enabled=0 && umask 0022 && echo umask 0022 >> /etc/profile"
+  become: yes
