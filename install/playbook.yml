@@ -70,13 +70,13 @@
 #  tags:
 #    - flink
 
-#- hosts: ambari
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: ambari-common
-#  tags:
-#    - ambari-common
+- hosts: ambari
+  gather_facts: true
+  become: false
+  roles:
+    - role: ambari-common
+  tags:
+    - ambari-common
 
 - hosts: ambari-server
   gather_facts: true

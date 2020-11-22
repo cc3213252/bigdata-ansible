@@ -4,13 +4,16 @@
   copy: src=ambari.repo  dest=/etc/yum.repos.d/
   become: yes
 
-- name: install ntp epel...
-  yum: name={{ item }} state=present
-  become: yes
+- name: install ntp epel openssl
+  shell: rpm -ivh /vagrant/tools/ambari/{{item}} --force
+  become: true
   loop:
-    - ntp
-    - epel-release
-    - openssl
+    - autogen-libopts-5.18-5.el7.x86_64.rpm
+    - ntpdate-4.2.6p5-29.el7.centos.2.x86_64.rpm
+    - ntp-4.2.6p5-29.el7.centos.2.x86_64.rpm
+    - epel-release-7-11.noarch.rpm
+    - openssl-libs-1.0.2k-19.el7.x86_64.rpm
+    - openssl-1.0.2k-19.el7.x86_64.rpm
 
 - name: set_time_sync...
   systemd:
