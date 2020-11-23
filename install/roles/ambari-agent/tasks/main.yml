@@ -1,10 +1,25 @@
 ---
 
+- name: install gcc RPM
+  shell: rpm -ivh /vagrant/tools/ambari/gcc/*.rpm --nodeps --force
+  become: true
+
 - name: install RPM
-  shell: rpm -ivh /vagrant/tools/ambari/{{item}}
+  shell: rpm -ivh /vagrant/tools/ambari/{{item}} --nodeps --force
   become: true
   loop:
     - ambari-agent-2.7.4.0-118.x86_64.rpm
+    - hdp-select-3.1.4.0-315.el7.noarch.rpm
+    - ambari-metrics-collector-2.7.4.0-118.x86_64.rpm
+    - ambari-metrics-hadoop-sink-2.7.4.0-118.x86_64.rpm
+    - ambari-metrics-grafana-2.7.4.0-118.x86_64.rpm
+    - python-devel-2.7.5-89.el7.x86_64.rpm
+    - ambari-metrics-monitor-2.7.4.0-118.x86_64.rpm
+    - ambari-metrics-common-2.7.4.0-118.noarch.rpm
+    - zookeeper_3_1_4_0_315-3.4.6.3.1.4.0-315.noarch.rpm
+    - redhat-lsb-4.1-27.el7.centos.1.x86_64.rpm
+    - zookeeper_3_1_4_0_315-server-3.4.6.3.1.4.0-315.noarch.rpm
+    - smartsense-hst-1.5.1.2.7.4.0-118.x86_64.rpm
 
 - name: 配置server地址
   template : src=ambari-agent.ini.j2 dest=/etc/ambari-agent/conf/ambari-agent.ini

@@ -6,7 +6,8 @@ postgresql.x86_64 0:9.2.24-4.el7_8
 
 ## postgresql RPM包下载
 
-https://pkgs.org/download/postgresql-server
+https://pkgs.org/download/postgresql-server  
+http://mirrors.163.com/centos/7/os/x86_64/Packages/  
 
 ## mysql下载地址  
 
@@ -17,8 +18,6 @@ https://blog.csdn.net/yangjjuan/article/details/61615187
 ## ambari部署说明
 
 需要分别部署ambari-common、ambari-server、ambari-agent这三个role  
-目前已经实现了准离线安装，还需短时间网络安装的包如下：  
-（ntp、epel-release、openssl、mysql-community-server、mysql-connector-java*）
 
 ## 需要离线准备的包
 

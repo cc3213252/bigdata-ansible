@@ -1,8 +1,11 @@
 ---
 
 - name: copy ambari repo...
-  copy: src=ambari.repo  dest=/etc/yum.repos.d/
+  copy: src={{item}}  dest=/etc/yum.repos.d/
   become: yes
+  loop:
+    - ambari.repo
+    - ambari-hdp-1.repo
 
 - name: install ntp epel openssl
   shell: rpm -ivh /vagrant/tools/ambari/{{item}} --force
@@ -14,6 +17,7 @@
     - epel-release-7-11.noarch.rpm
     - openssl-libs-1.0.2k-19.el7.x86_64.rpm
     - openssl-1.0.2k-19.el7.x86_64.rpm
+    - unzip-6.0-21.el7.x86_64.rpm
 
 - name: set_time_sync...
   systemd:
