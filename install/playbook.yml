@@ -6,13 +6,13 @@
   tags:
     - common
 
-#- hosts: zookeeper
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: zookeeper
-#  tags:
-#    - zookeeper
+- hosts: zookeeper
+  gather_facts: true
+  become: false
+  roles:
+    - role: zookeeper
+  tags:
+    - zookeeper
 #
 #- hosts: hadoop
 #  gather_facts: true
@@ -70,27 +70,34 @@
 #  tags:
 #    - flink
 
-- hosts: ambari
+#- hosts: ambari
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: ambari-common
+#  tags:
+#    - ambari-common
+#
+#- hosts: ambari-server
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: ambari-server
+#  tags:
+#    - ambari-server
+#
+#- hosts: ambari-agent
+#  gather_facts: true
+#  become: false
+#  roles:
+#    - role: ambari-agent
+#  tags:
+#    - ambari-agent
+
+- hosts: clickhouse
   gather_facts: true
   become: false
   roles:
-    - role: ambari-common
+    - role: clickhouse
   tags:
-    - ambari-common
-
-- hosts: ambari-server
-  gather_facts: true
-  become: false
-  roles:
-    - role: ambari-server
-  tags:
-    - ambari-server
-
-- hosts: ambari-agent
-  gather_facts: true
-  become: false
-  roles:
-    - role: ambari-agent
-  tags:
-    - ambari-agent
-
+    - clickhouse

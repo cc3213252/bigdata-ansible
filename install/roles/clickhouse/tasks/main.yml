@@ -1,0 +1,26 @@
+---
+
+- name: install RPM
+  shell: rpm -ivh /vagrant/tools/clickhouse/*.rpm
+  become: yes
+
+- name: vagrant加入clickhouse组
+  shell: usermod -a -G clickhouse vagrant
+  become: yes
+
+- name: 增加集群配置
+  template:
+    src: custom-cfg.xml.j2
+    dest: /etc/clickhouse-server/config.d/custom-cfg.xml
+    owner: clickhouse
+    group: clickhouse
+  become: yes
+
+- name: 配置目录权限
+  shell: chown -R clickhouse {{item}}
+  loop:
+    - /var/lib/clickhouse
+    - /var/log/clickhouse-server
+    - /etc/clickhouse-server
+    - /etc/clickhouse-client
+  become: yes

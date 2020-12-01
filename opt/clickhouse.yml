@@ -1,0 +1,24 @@
+---
+- hosts: clickhouse
+  tasks:
+    - name: start clickhouse
+      shell: clickhouse-server start --daemon
+  tags: start
+
+- hosts: clickhouse
+  tasks:
+    - name: stop server
+      shell: clickhouse-server stop
+  tags: stop
+
+- hosts: clickhouse
+  tasks:
+    - name: server status
+      shell: clickhouse-server status
+      register: server_mode
+
+    - name: print status
+      debug:
+        msg: "{{ server_mode.stdout }}"
+  tags: status
+

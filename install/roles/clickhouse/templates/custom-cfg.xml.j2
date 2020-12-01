@@ -1,0 +1,23 @@
+<yandex>
+    <remote_servers>
+        <perftest_1shards_3replicas>
+            <shard>
+            {% for host in groups['clickhouse'] %}
+                <replica>
+                    <host>{{ host }}</host>
+                    <port>9000</port>
+                 </replica>
+            {% endfor %}
+            </shard>
+        </perftest_1shards_3replicas>
+    </remote_servers>
+
+    <zookeeper>
+        {% for host in groups['zookeeper'] %}
+        <node>
+            <host>{{ host }}</host>
+            <port>2181</port>
+        </node>
+        {% endfor %}
+    </zookeeper>
+</yandex>

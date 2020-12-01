@@ -115,3 +115,10 @@ host1
 [ambari-agent]
 host2
 host3
+
+# clickhouse配置文件
+
+[clickhouse]
+host1
+host2
+host3
