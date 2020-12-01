@@ -16,6 +16,14 @@
     group: clickhouse
   become: yes
 
+- name: 增加用户配置
+  template:
+    src: custom-users.xml.j2
+    dest: /etc/clickhouse-server/users.d/custom-users.xml
+    owner: clickhouse
+    group: clickhouse
+  become: yes
+
 - name: 配置目录权限
   shell: chown -R clickhouse {{item}}
   loop:

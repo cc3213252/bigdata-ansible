@@ -2,19 +2,35 @@
 - hosts: clickhouse
   tasks:
     - name: start clickhouse
-      shell: clickhouse-server start --daemon
+      service:
+        name: "clickhouse-server"
+        state: started
+  become: yes
   tags: start
 
 - hosts: clickhouse
   tasks:
-    - name: stop server
-      shell: clickhouse-server stop
+    - name: stop clickhouse
+      service:
+        name: "clickhouse-server"
+        state: stopped
+  become: yes
   tags: stop
 
 - hosts: clickhouse
   tasks:
+    - name: restart clickhouse
+      service:
+        name: "clickhouse-server"
+        state: restarted
+  become: yes
+  tags: restart
+
+- hosts: clickhouse
+  tasks:
     - name: server status
-      shell: clickhouse-server status
+      shell: service clickhouse-server status
+      become: yes
       register: server_mode
 
     - name: print status
