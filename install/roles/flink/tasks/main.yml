@@ -6,6 +6,11 @@
     dest: /vagrant/tools/flink/conf/flink-conf.yaml
     mode: 0760
 
+- name: 配置masters
+  template:
+    src: masters.j2
+    dest: /vagrant/tools/flink/conf/masters
+
 - name: 配置workers
   template:
     src: workers.j2

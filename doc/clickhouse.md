@@ -25,3 +25,8 @@ clickhouse-client --password bsOPKgLp
 ```sql
 select * from system.clusters;
 ```
+
+## 客户端工具
+
+http://ui.tabix.io/#!/sql  
+注意这个工具sql不需要分号  

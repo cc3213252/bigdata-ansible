@@ -98,6 +98,9 @@ host1
 [taskmanager]
 host2
 
+[flink-masters]
+host1
+
 [flink-workers]
 host2
 host3
