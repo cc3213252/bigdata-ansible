@@ -118,5 +118,5 @@ kafka 2.6.0
 hadoop 3.2.1  
 elasticsearch 7.9.3  
 hbase 2.3.3  
-flink 1.6.1，1.11.2    
+flink 1.6.1，1.11.2, 1.12.0      
 clickhouse 20.11.4.13  
