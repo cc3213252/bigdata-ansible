@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: false
+  roles:
+    - role: common
+
+- hosts: zookeeper
+  gather_facts: true
+  become: false
+  roles:
+    - role: zookeeper
+
+- hosts: storm
+  gather_facts: true
+  become: false
+  roles:
+    - role: storm

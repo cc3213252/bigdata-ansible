@@ -4,7 +4,7 @@
 
 我们搞大数据开发，多数是集群环境，有大量的配置，有时一个环境问题花费大量时间排查，为了提升效率，开发了这套脚本。 
  
-这套脚本安装一个3台机器的zookeeper、kafka、storm、hadoop、elasticsearch、hbase、flink集群，从无到有都只需要4分钟，而且脚本极其简单。  
+这套脚本安装一个3台机器的zookeeper、kafka、storm、hadoop、elasticsearch、hbase、flink、clickhouse集群，从无到有都只需要4分钟，而且脚本极其简单。  
 
 # 开发规则
 
@@ -17,11 +17,9 @@ vagrant-hostmanager
 
 # 使用说明
 
-1、默认在tools目录下下载好、解压、并重命名为jdk、zookeeper、hadoop、storm、kafka    
-2、配置Vagrantfile中host  
-3、配置install/inventory/hosts  
-4、playbook.yml中注释掉不安装的脚本  
-5、vagrant up  
+1、默认在tools目录下下载好、解压、并重命名为jdk、zookeeper、hadoop、storm、kafka、flink、clickhouse等等      
+2、cp ~/.ssh/id_rsa* install/roles/common/files     
+5、vagrant --tags="kafka" up  
 
 # 脚本说明
 

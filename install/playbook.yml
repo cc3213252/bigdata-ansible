@@ -6,98 +6,55 @@
   tags:
     - common
 
-#- hosts: zookeeper
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: zookeeper
-#  tags:
-#    - zookeeper
-#
-#- hosts: hadoop
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: hadoop-ha
-#  tags:
-#    - hadoop-ha
-
-#- hosts: hadoop
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: hadoop
-#  tags:
-#    - hadoop
-
-#- hosts: storm
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: storm
-#  tags:
-#    - storm
-#
-#- hosts: kafka
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: kafka
-#  tags:
-#    - kafka
-
-#- hosts: elasticsearch
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: elasticsearch
-#  tags:
-#    - elasticsearch
-
-#- hosts: hbase
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: hbase
-#  tags:
-#    - hbase
-
-- hosts: flink
+- hosts: hadoop
   gather_facts: true
   become: false
   roles:
-    - role: flink
+    - role: hadoop-ha
+  tags:
+    - hadoop-ha
+
+- import_playbook: playbooks/ambari.yml
+  tags:
+    - ambari
+
+- import_playbook: playbooks/clickhouse.yml
+  tags:
+    - clickhouse
+
+- import_playbook: playbooks/elasticsearch.yml
+  tags:
+    - elasticsearch
+
+- import_playbook: playbooks/flink.yml
   tags:
     - flink
 
-#- hosts: ambari
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: ambari-common
-#  tags:
-#    - ambari-common
-#
-#- hosts: ambari-server
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: ambari-server
-#  tags:
-#    - ambari-server
-#
-#- hosts: ambari-agent
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: ambari-agent
-#  tags:
-#    - ambari-agent
+- import_playbook: playbooks/hadoop.yml
+  tags:
+    - hadoop
 
-#- hosts: clickhouse
-#  gather_facts: true
-#  become: false
-#  roles:
-#    - role: clickhouse
-#  tags:
-#    - clickhouse
+- import_playbook: playbooks/hbase.yml
+  tags:
+    - hbase
+
+- import_playbook: playbooks/kafka.yml
+  tags:
+    - kafka
+
+- import_playbook: playbooks/kafka-flink-clickhouse.yml
+  tags:
+    - kafka-flink-clickhouse
+
+- import_playbook: playbooks/storm.yml
+  tags:
+    - storm
+
+- import_playbook: playbooks/zookeeper.yml
+  tags:
+    - zookeeper
+
+
+
+
+

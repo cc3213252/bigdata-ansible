@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: false
+  roles:
+    - role: common
+
+- hosts: ambari
+  gather_facts: true
+  become: false
+  roles:
+    - role: ambari-common
+
+- hosts: ambari-server
+  gather_facts: true
+  become: false
+  roles:
+    - role: ambari-server
+
+- hosts: ambari-agent
+  gather_facts: true
+  become: false
+  roles:
+    - role: ambari-agent

@@ -30,3 +30,6 @@ select * from system.clusters;
 
 http://ui.tabix.io/#!/sql  
 注意这个工具sql不需要分号  
+用户名：default  
+密码：bsOPKgLp  
+端口：9000
