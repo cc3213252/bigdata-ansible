@@ -19,9 +19,18 @@ echo -n "$PASSWORD" | sha256sum | tr -d '-'
 得到密码明文：bsOPKgLp  
 密码密文：91bce29e16c1046e7e21229439944c3a95539edc05b446ceef2b969658eb9863
 
+## 要支持mysql客户端，必须使用sha1sum
+
+```bash
+PASSWORD=$(base64 < /dev/urandom | head -c8); echo "$PASSWORD"; echo -n "$PASSWORD"  \
+ | sha1sum | tr -d '-' | xxd -r -p | sha1sum | tr -d '-'
+```
+得到密码明文：GhTY1OeM  
+密码密文：66fcb7b26879a30b23b155bff45c1b0d8ab57e4b
+
 ## 测试
 
-clickhouse-client --password bsOPKgLp
+clickhouse-client --password GhTY1OeM
 ```sql
 select * from system.clusters;
 ```
@@ -31,5 +40,5 @@ select * from system.clusters;
 http://ui.tabix.io/#!/sql  
 注意这个工具sql不需要分号  
 用户名：default  
-密码：bsOPKgLp  
+密码：GhTY1OeM  
 端口：9000
