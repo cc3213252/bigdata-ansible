@@ -9,6 +9,10 @@ cd kafka-flink-clickhouse
 mv ../../tools .
 vagrant up
 ```
+
+## 操作服务
+
+ansible-playbook --tags=status ../../opt/zookeeper.yml
   
 ## 问题
 
