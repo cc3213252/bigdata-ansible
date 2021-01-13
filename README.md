@@ -19,7 +19,7 @@ vagrant-hostmanager
 
 1、默认在tools目录下下载好、解压、并重命名为jdk、zookeeper、hadoop、storm、kafka、flink、clickhouse等等      
 2、cp ~/.ssh/id_rsa* install/roles/common/files     
-5、vagrant --tags="kafka" up  
+5、vagrant --tags=kafka up  
 
 # 脚本说明
 
